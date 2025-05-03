@@ -73,7 +73,7 @@ class Form extends React.Component {
         this.setState({ phoneError, passwordError }, () => {
             if (!phoneError && !passwordError) {
                 setTimeout(() => {
-                    alert(`Телефон: +7 ${this.state.phone}, Пароль: ${this.state.password}`);
+                // Прописать логику отображения следующей страницы в случае верных данных
                 }, 300);
             }
         });
