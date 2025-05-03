@@ -1,8 +1,64 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import AccountCard from './AccountCard';
 import './App.css';
 
 
+const MainScreen = () => {
+  const [accounts, setAccounts] = useState({
+    debit: { name: 'Дебетовый счет', balance: 0 },
+    credit: { name: 'Кредитный счет', balance: 0 },
+    deposit: { name: 'Вклад', balance: 0 }
+  });
+  const navigate = useNavigate();
+
+  // Загрузка данных из БД
+  useEffect(() => {
+    const fetchAccounts = async () => {
+      // Здесь должен быть реальный запрос к API
+      const mockData = {
+        debit: 50000,
+        credit: -10000,
+        deposit: 150000
+      };
+      
+      setAccounts({
+        debit: { ...accounts.debit, balance: mockData.debit },
+        credit: { ...accounts.credit, balance: mockData.credit },
+        deposit: { ...accounts.deposit, balance: mockData.deposit }
+      });
+    };
+
+    fetchAccounts();
+  }, []);
+
+  const handleAction = (action, accountType) => {
+    navigate(`/${action}/${accountType}`);
+  };
+
+  return (
+    <div className="container">
+      <h1>Банковское приложение</h1>
+      <div className="accounts-grid">
+        {Object.entries(accounts).map(([key, account]) => (
+          <AccountCard 
+            key={key}
+            account={account}
+            onDeposit={() => handleAction('deposit', key)}
+            onWithdraw={() => handleAction('withdraw', key)}
+            onTransfer={() => handleAction('transfer', key)}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+//export default MainScreen;
+
+
 function Main_screen() {
+
   // Состояния для счетов (изначально пустые, потом загружаются из БД)
   const [accounts, setAccounts] = useState({
     debit: { name: 'Дебетовый счет', balance: 0 },
@@ -110,6 +166,12 @@ function Main_screen() {
     }).format(balance);
   };
 
+
+  const handleAction = (action, accountType) => {
+    navigate(`/${action}/${accountType}`);
+  };
+
+
   return (
     <div className="bank-app">
       <h1>TTT Bank</h1>
@@ -124,7 +186,7 @@ function Main_screen() {
             </div>
             
             <div className="account-actions">
-              <input
+            <input
                 type="tel"
                 placeholder="Номер телефона"
                 value={phoneNumbers[key]}
@@ -139,12 +201,14 @@ function Main_screen() {
               />
               
               <div className="buttons">
-                <button onClick={() => handleTopUp(key)}>Пополнить</button>
-                <button onClick={() => handleSend(key)}>Отправить</button>
+                <button onClick={() => handleAction('deposit', key)}>Пополнить</button>
+                <button onClick={() => handleAction('withdraw', key)}>Вывести</button>
+                <button onClick={() => handleAction('transfer', key)}>Отправить</button>
               </div>
             </div>
           </div>
         ))}
+        
       </div>
     </div>
   );
