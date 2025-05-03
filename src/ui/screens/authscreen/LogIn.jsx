@@ -2,40 +2,11 @@ import "./AuthScreenStyle.css";
 import React from "react";
 import logo from "/src/assets/logo_ttt.svg";
 import { Link } from "react-router-dom";
-
-const normalizeInput = (value, previousValue) => {
-    if (!value) return value;
-    const currentValue = value.replace(/[^\d]/g, "");
-    const cvLength = currentValue.length;
-
-    if (!previousValue || value.length > previousValue.length) {
-        if (cvLength < 4) return `(${currentValue}`;
-        if (cvLength < 7) return `(${currentValue.slice(0, 3)}) ${currentValue.slice(3)}`;
-        if (cvLength < 9) return `(${currentValue.slice(0, 3)}) ${currentValue.slice(3, 6)} ${currentValue.slice(6)}`;
-        return `(${currentValue.slice(0, 3)}) ${currentValue.slice(3, 6)} ${currentValue.slice(6, 8)}-${currentValue.slice(8, 10)}`;
-    }
-
-    return value;
-};
-
-const validateInput = (value) => {
-    let error = "";
-    const digits = value.replace(/[^\d]/g, "");
-
-    if (!value) error = "Required!";
-    else if (digits.length !== 10) error = "Некорректный номер телефона";
-
-    return error;
-};
-
-const validatePassword = (value) => {
-    let error = "";
-
-    if (!value) error = "Required!";
-    else if (value.length < 6) error = "Пароль должен содержать минимум 6 символов";
-
-    return error;
-};
+import {
+    normalizePhoneInput,
+    validatePhoneInput,
+    validatePassword
+} from "../../components/ComponentForAuth.js"
 
 class Form extends React.Component {
     constructor() {
@@ -53,7 +24,7 @@ class Form extends React.Component {
 
     handlePhoneChange({ target: { value } }) {
         this.setState((prevState) => ({
-            phone: normalizeInput(value, prevState.phone),
+            phone: normalizePhoneInput(value, prevState.phone),
             phoneError: ""
         }));
     }
@@ -67,13 +38,13 @@ class Form extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        const phoneError = validateInput(this.state.phone);
+        const phoneError = validatePhoneInput(this.state.phone);
         const passwordError = validatePassword(this.state.password);
 
         this.setState({ phoneError, passwordError }, () => {
             if (!phoneError && !passwordError) {
                 setTimeout(() => {
-                // Прописать логику отображения следующей страницы в случае верных данных
+                    alert(`Телефон: +7 ${this.state.phone}, Пароль: ${this.state.password}`);
                 }, 300);
             }
         });
@@ -123,6 +94,9 @@ class Form extends React.Component {
                         <button type="submit" className="login-btn">
                             Войти
                         </button>
+                        <div className="auth-links">
+                            <Link to="/RegScreen" className="auth-link register-link">Зарегистрироваться</Link>
+                        </div>
                     </form>
                 </div>
             </div>
