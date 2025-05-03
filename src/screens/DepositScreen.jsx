@@ -38,7 +38,7 @@ const DepositScreen = () => {
 
   return (
     <div className="container">
-      <h2>Пополнение: {account.name}</h2>
+      <h1>Пополнение: {account.name}</h1>
       <div className="form-container">
         <input
           type="number"
@@ -46,8 +46,10 @@ const DepositScreen = () => {
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
         />
+        <div className="buttons">
         <button onClick={handleDeposit}>Пополнить</button>
         <button className="back-button" onClick={() => navigate(-1)}>Назад</button>
+        </div>
       </div>
     </div>
   );

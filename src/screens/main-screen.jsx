@@ -176,26 +176,55 @@ function Main_screen() {
 
   return (
     <div className="bank-app">
-      <h1>TTT Bank</h1>
+      <h1 className="greeting" >TTT Bank</h1>
       <div className="accounts-container">
+        <div className="account-cards">
         {Object.entries(accounts).map(([key, account]) => (
           <div onClick={() => key == 'credit' ? navigate('../creditM') : navigate('../depositM') } key={'debit'} className={`account-card ${key == 'debit' ? 'cant' : ''} `}>
             <div className="account-info">
-              <h2>{account.name}</h2>
               <p className={`balance ${account.balance < 0 ? 'negative' : ''}`}>
                 {formatBalance(account.balance)}
-              </p>
+              </p><br/>
+              <h2 className="account-type">{account.name}</h2>
             </div>
-            <div className="account-actions">
-              
             </div>
-          </div>
-        ))}
-              <div className="buttons">
-                <button onClick={() => handleAction('deposit', 'debit')}>Пополнить</button>
-                <button onClick={() => handleAction('withdraw', 'debit')}>Вывести</button>
-                <button onClick={() => handleAction('transfer', 'debit')}>Отправить</button>
-              </div>
+
+))}
+</div>
+<div className="operations-panel">
+        {/* Поле ввода суммы */}
+        <div className="amount-input">
+          <input
+            type="tel"
+            placeholder="Номер телефона"
+            className="input-field"
+            //value={amount}
+            //onChange={(e) => setAmount(e.target.value)}
+          />
+        </div>
+        <div className="amount-input">
+          <input
+            type="number"
+            placeholder="Сумма"
+            className="input-field"
+            //value={amount}
+            //onChange={(e) => setAmount(e.target.value)}
+          />
+        </div>
+
+        {/* Кнопки операций */}
+        <div className="buttons">
+          <button className="btn-gen" onClick={() => handleAction('deposit', 'debit')}>
+            Пополнить
+          </button>
+          <button className="btn-gen" onClick={() => handleAction('withdraw', 'debit')}>
+            Вывести
+          </button>
+          <button className="btn-gen" onClick={() => handleAction('transfer', 'debit')}>
+            Отправить
+          </button>
+        </div>
+        </div>
       </div>
     </div>
   );

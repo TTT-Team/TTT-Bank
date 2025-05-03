@@ -44,7 +44,7 @@ const WithdrawScreen = () => {
 
   return (
     <div className="container">
-      <h2>Вывод средств: {account.name}</h2>
+      <h1>Вывод средств: {account.name}</h1>
       <p>Доступно: {new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB' }).format(account.balance)}</p>
       <div className="form-container">
         <input
@@ -53,8 +53,10 @@ const WithdrawScreen = () => {
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
         />
-        <button onClick={handleWithdraw}>Вывести</button>
-        <button className="back-button" onClick={() => navigate(-1)}>Назад</button>
+        <div className="buttons">
+          <button onClick={handleWithdraw}>Вывести</button>
+          <button className="back-button" onClick={() => navigate(-1)}>Назад</button>
+        </div>
       </div>
     </div>
   );

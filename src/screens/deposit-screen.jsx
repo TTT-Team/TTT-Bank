@@ -4,57 +4,7 @@ import AccountCard from './AccountCard';
 import './App.css';
 
 
-const MainScreen = () => {
-  const [accounts, setAccounts] = useState({
-    debit: { name: 'Дебетовый счет', balance: 0 },
-    credit: { name: 'Кредитный счет', balance: 0 },
-    deposit: { name: 'Вклад', balance: 0 }
-  });
-  const navigate = useNavigate();
 
-  // Загрузка данных из БД
-  useEffect(() => {
-    const fetchAccounts = async () => {
-      // Здесь должен быть реальный запрос к API
-      const mockData = {
-        debit: 50000,
-        credit: -10000,
-        deposit: 150000
-      };
-      
-      setAccounts({
-        debit: { ...accounts.debit, balance: mockData.debit },
-        credit: { ...accounts.credit, balance: mockData.credit },
-        deposit: { ...accounts.deposit, balance: mockData.deposit }
-      });
-    };
-
-    fetchAccounts();
-  }, []);
-
-  const handleAction = (action, accountType) => {
-    navigate(`/${action}/${accountType}`);
-  };
-
-  return (
-    <div className="container">
-      <h1>Банковское приложение</h1>
-      <div className="accounts-grid">
-        {Object.entries(accounts).map(([key, account]) => (
-          <AccountCard 
-            key={key}
-            account={account}
-            onDeposit={() => handleAction('deposit', key)}
-            onWithdraw={() => handleAction('withdraw', key)}
-            onTransfer={() => handleAction('transfer', key)}
-          />
-        ))}
-      </div>
-    </div>
-  );
-};
-
-//export default MainScreen;
 
 
 function Main_screen() {
@@ -177,26 +127,54 @@ function Main_screen() {
 
   return (
     <div className="bank-app">
-      <h1>TTT Bank</h1>
+      <h1 className="greeting">TTT Bank</h1>
       <div className="accounts-container">
+        <div className="account-cards">
         {Object.entries(accounts).map(([key, account]) => (
           <div onClick={() => key == 'credit' ? navigate('../creditM') : navigate('../debitM') } key={key} className={`account-card ${key == 'deposit' ? 'cant' : ''} `}>
             <div className="account-info">
-              <h2>{account.name}</h2>
               <p className={`balance ${account.balance < 0 ? 'negative' : ''}`}>
                 {formatBalance(account.balance)}
-              </p>
-            </div>
-            <div className="account-actions">
+              </p> <br />
+              <h2 className="account-type">{account.name}</h2>
             </div>
           </div>
         ))}
-        
-              <div className="buttons">
-                <button onClick={() => handleAction('deposit', 'deposit')}>Пополнить</button>
-                <button onClick={() => handleAction('withdraw', 'deposit')}>Вывести</button>
-                <button onClick={() => handleAction('transfer', 'deposit')}>Отправить</button>
-              </div>
+        </div>
+        <div className="operations-panel">
+        {/* Поле ввода суммы */}
+        <div className="amount-input">
+          <input
+            type="tel"
+            placeholder="Номер телефона"
+            className="input-field"
+            //value={amount}
+            //onChange={(e) => setAmount(e.target.value)}
+          />
+        </div>
+        <div className="amount-input">
+          <input
+            type="number"
+            placeholder="Сумма"
+            className="input-field"
+            //value={amount}
+            //onChange={(e) => setAmount(e.target.value)}
+          />
+        </div>
+
+        {/* Кнопки операций */}
+        <div className="buttons">
+          <button className="btn-gen" onClick={() => handleAction('deposit', 'deposit')}>
+            Пополнить
+          </button>
+          <button className="btn-gen" onClick={() => handleAction('withdraw', 'deposit')}>
+            Вывести
+          </button>
+          <button className="btn-gen" onClick={() => handleAction('transfer', 'deposit')}>
+            Отправить
+          </button>
+        </div>
+        </div>
       </div>
     </div>
   );

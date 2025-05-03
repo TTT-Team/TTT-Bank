@@ -45,7 +45,7 @@ const TransferScreen = () => {
   console.log(account);
   return (
     <div className="container">
-      <h2>Перевод с: {account.name}</h2>
+      <h1>Перевод с: {account.name}</h1>
       <div className="form-container">
         <input
           type="tel"
@@ -59,8 +59,11 @@ const TransferScreen = () => {
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
         />
-        <button onClick={handleTransfer}>Отправить</button>
-        <button className="back-button" onClick={() => navigate(-1)}>Назад</button>
+        <div className="buttons">
+
+          <button onClick={handleTransfer}>Отправить</button>
+          <button onClick={() => navigate(-1)}>Назад</button>
+        </div>
       </div>
     </div>
   );
