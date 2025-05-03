@@ -1,0 +1,74 @@
+.bank-app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  text-align: center;
+  color: #2c3e50;
+}
+
+.accounts-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.account-card {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background-color: white;
+}
+
+.account-info {
+  flex: 1;
+}
+
+.account-actions {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.balance {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.balance.negative {
+  color: #e74c3c;
+}
+
+input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: #3498db;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  flex: 1;
+}
+
+button:hover {
+  background-color: #2980b9;
+}

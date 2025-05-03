@@ -1,0 +1,153 @@
+import React, { useState, useEffect } from 'react';
+import './App.css';
+
+
+function Main_screen() {
+  // Состояния для счетов (изначально пустые, потом загружаются из БД)
+  const [accounts, setAccounts] = useState({
+    debit: { name: 'Дебетовый счет', balance: 0 },
+    credit: { name: 'Кредитный счет', balance: 0 },
+    deposit: { name: 'Вклад', balance: 0 }
+  });
+
+  // Состояния для полей ввода
+  const [phoneNumbers, setPhoneNumbers] = useState({
+    debit: '',
+    credit: '',
+    deposit: ''
+  });
+
+  // Состояния для сумм операций
+  const [amounts, setAmounts] = useState({
+    debit: '',
+    credit: '',
+    deposit: ''
+  });
+
+  // Загрузка данных из БД (имитация)
+  useEffect(() => {
+    // Здесь должен быть реальный запрос к API/БД
+    const fetchAccounts = async () => {
+      // Имитация ответа от сервера
+      const response = {
+        debit: 25000,
+        credit: -5000,
+        deposit: 100000
+      };
+      
+      setAccounts({
+        debit: { ...accounts.debit, balance: response.debit },
+        credit: { ...accounts.credit, balance: response.credit },
+        deposit: { ...accounts.deposit, balance: response.deposit }
+      });
+    };
+
+    fetchAccounts();
+  }, []);
+
+  // Обработчики изменения полей ввода
+  const handlePhoneChange = (accountType, value) => {
+    setPhoneNumbers({
+      ...phoneNumbers,
+      [accountType]: value
+    });
+  };
+
+  const handleAmountChange = (accountType, value) => {
+    setAmounts({
+      ...amounts,
+      [accountType]: value
+    });
+  };
+
+  // Обработчики кнопок
+  const handleTopUp = (accountType) => {
+    const amount = parseFloat(amounts[accountType]);
+    if (amount && amount > 0) {
+      // Здесь должен быть запрос к API для пополнения
+      setAccounts({
+        ...accounts,
+        [accountType]: {
+          ...accounts[accountType],
+          balance: accounts[accountType].balance + amount
+        }
+      });
+      alert(`Пополнение ${accounts[accountType].name} на ${amount}₽`);
+    } else {
+      alert('Введите корректную сумму');
+    }
+  };
+
+  const handleSend = (accountType) => {
+    const phone = phoneNumbers[accountType];
+    const amount = parseFloat(amounts[accountType]);
+    
+    if (phone && amount && amount > 0) {
+      // Здесь должен быть запрос к API для перевода
+      if (accounts[accountType].balance >= amount) {
+        setAccounts({
+          ...accounts,
+          [accountType]: {
+            ...accounts[accountType],
+            balance: accounts[accountType].balance - amount
+          }
+        });
+        alert(`Перевод ${amount}₽ на номер ${phone} с ${accounts[accountType].name}`);
+      } else {
+        alert('Недостаточно средств');
+      }
+    } else {
+      alert('Заполните номер телефона и сумму');
+    }
+  };
+
+  // Форматирование суммы для отображения
+  const formatBalance = (balance) => {
+    return new Intl.NumberFormat('ru-RU', {
+      style: 'currency',
+      currency: 'RUB',
+      minimumFractionDigits: 0
+    }).format(balance);
+  };
+
+  return (
+    <div className="bank-app">
+      <h1>TTT Bank</h1>
+      <div className="accounts-container">
+        {Object.entries(accounts).map(([key, account]) => (
+          <div key={key} className="account-card">
+            <div className="account-info">
+              <h2>{account.name}</h2>
+              <p className={`balance ${account.balance < 0 ? 'negative' : ''}`}>
+                {formatBalance(account.balance)}
+              </p>
+            </div>
+            
+            <div className="account-actions">
+              <input
+                type="tel"
+                placeholder="Номер телефона"
+                value={phoneNumbers[key]}
+                onChange={(e) => handlePhoneChange(key, e.target.value)}
+              />
+              
+              <input
+                type="number"
+                placeholder="Сумма"
+                value={amounts[key]}
+                onChange={(e) => handleAmountChange(key, e.target.value)}
+              />
+              
+              <div className="buttons">
+                <button onClick={() => handleTopUp(key)}>Пополнить</button>
+                <button onClick={() => handleSend(key)}>Отправить</button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default Main_screen
