@@ -7,16 +7,23 @@ import DepositScreen from './screens/DepositScreen.jsx';
 import WithdrawScreen from './screens/WithdrawScreen.jsx';
 import TransferScreen from './screens/TransfertScreen.jsx';
 
+import CreditMainScreen from './screens/credit-screen.jsx';
+import DepositMainScreen from './screens/deposit-screen.jsx';
+
+
+
 
 function App() {
   return (
       <BrowserRouter>
           <Routes>
-              <Route path ="/" element={<Main_screen />}/> {} 
+              <Route path ="/debitM" element={<Main_screen />}/> {} 
+              <Route path="/creditM" element={<CreditMainScreen />} />
+              <Route path="/depositM" element={<DepositMainScreen />} />
+              
               <Route path="/deposit/:accountType" element={<DepositScreen />} />
-        <Route path="/withdraw/:accountType" element={<WithdrawScreen />} />
-        <Route path="/transfer/:accountType" element={<TransferScreen />} />
-          
+              <Route path="/withdraw/:accountType" element={<WithdrawScreen />} />
+              <Route path="/transfer/:accountType" element={<TransferScreen />} />
           </Routes>
       </BrowserRouter>
   )

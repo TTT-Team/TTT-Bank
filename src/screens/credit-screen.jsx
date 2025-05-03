@@ -112,52 +112,53 @@ function Main_screen() {
     });
   };
 
-  //const handleAmountChange = (accountType, value) => {
-  //  setAmounts({
-  //    ...amounts,
-  //    [accountType]: value
-  //  });
-  //};
-  // Обработчики кнопок
-  //const handleTopUp = (accountType) => {
-  //  const amount = parseFloat(amounts[accountType]);
-  //  if (amount && amount > 0) {
-  //    // Здесь должен быть запрос к API для пополнения
-  //    setAccounts({
-  //      ...accounts,
-  //      [accountType]: {
-  //        ...accounts[accountType],
-  //        balance: accounts[accountType].balance + amount
-  //      }
-  //    });
-  //    alert(`Пополнение ${accounts[accountType].name} на ${amount}₽`);
-  //  } else {
-  //    alert('Введите корректную сумму');
-  //  }
-  //};
+  const handleAmountChange = (accountType, value) => {
+    setAmounts({
+      ...amounts,
+      [accountType]: value
+    });
+  };
 
-  //const handleSend = (accountType) => {
-  //  const phone = phoneNumbers[accountType];
-  //  const amount = parseFloat(amounts[accountType]);
+  // Обработчики кнопок
+  const handleTopUp = (accountType) => {
+    const amount = parseFloat(amounts[accountType]);
+    if (amount && amount > 0) {
+      // Здесь должен быть запрос к API для пополнения
+      setAccounts({
+        ...accounts,
+        [accountType]: {
+          ...accounts[accountType],
+          balance: accounts[accountType].balance + amount
+        }
+      });
+      alert(`Пополнение ${accounts[accountType].name} на ${amount}₽`);
+    } else {
+      alert('Введите корректную сумму');
+    }
+  };
+
+  const handleSend = (accountType) => {
+    const phone = phoneNumbers[accountType];
+    const amount = parseFloat(amounts[accountType]);
     
-  //  if (phone && amount && amount > 0) {
-  //    // Здесь должен быть запрос к API для перевода
-  //    if (accounts[accountType].balance >= amount) {
-  //      setAccounts({
-  //        ...accounts,
-  //        [accountType]: {
-  //          ...accounts[accountType],
-  //          balance: accounts[accountType].balance - amount
-  //        }
-  //      });
-  //      alert(`Перевод ${amount}₽ на номер ${phone} с ${accounts[accountType].name}`);
-  //    } else {
-  //      alert('Недостаточно средств');
-  //    }
-  //  } else {
-  //    alert('Заполните номер телефона и сумму');
-  //  }
-  //};
+    if (phone && amount && amount > 0) {
+      // Здесь должен быть запрос к API для перевода
+      if (accounts[accountType].balance >= amount) {
+        setAccounts({
+          ...accounts,
+          [accountType]: {
+            ...accounts[accountType],
+            balance: accounts[accountType].balance - amount
+          }
+        });
+        alert(`Перевод ${amount}₽ на номер ${phone} с ${accounts[accountType].name}`);
+      } else {
+        alert('Недостаточно средств');
+      }
+    } else {
+      alert('Заполните номер телефона и сумму');
+    }
+  };
 
   // Форматирование суммы для отображения
   const formatBalance = (balance) => {
@@ -179,7 +180,7 @@ function Main_screen() {
       <h1>TTT Bank</h1>
       <div className="accounts-container">
         {Object.entries(accounts).map(([key, account]) => (
-          <div onClick={() => key == 'credit' ? navigate('../creditM') : navigate('../depositM') } key={'debit'} className={`account-card ${key == 'debit' ? 'cant' : ''} `}>
+          <div onClick={() => key == 'debit' ? navigate('../debitM') : navigate('../depositM') } key={key} className={`account-card ${key == 'credit' ? 'cant' : ''} `}>
             <div className="account-info">
               <h2>{account.name}</h2>
               <p className={`balance ${account.balance < 0 ? 'negative' : ''}`}>
@@ -187,14 +188,14 @@ function Main_screen() {
               </p>
             </div>
             <div className="account-actions">
-              
             </div>
           </div>
         ))}
+        
               <div className="buttons">
-                <button onClick={() => handleAction('deposit', 'debit')}>Пополнить</button>
-                <button onClick={() => handleAction('withdraw', 'debit')}>Вывести</button>
-                <button onClick={() => handleAction('transfer', 'debit')}>Отправить</button>
+                <button onClick={() => handleAction('deposit', 'credit')}>Пополнить</button>
+                <button onClick={() => handleAction('withdraw', 'credit')}>Вывести</button>
+                <button onClick={() => handleAction('transfer', 'credit')}>Отправить</button>
               </div>
       </div>
     </div>

@@ -38,11 +38,11 @@ const TransferScreen = () => {
 
     // Здесь должен быть запрос к API для перевода
     alert(`Перевод ${amount}₽ на номер ${phone} выполнен`);
-    navigate('/');
+    navigate(-1);
   };
 
   if (!account) return <div>Загрузка...</div>;
-
+  console.log(account);
   return (
     <div className="container">
       <h2>Перевод с: {account.name}</h2>
@@ -60,7 +60,7 @@ const TransferScreen = () => {
           onChange={(e) => setAmount(e.target.value)}
         />
         <button onClick={handleTransfer}>Отправить</button>
-        <button className="back-button" onClick={() => navigate('/')}>Назад</button>
+        <button className="back-button" onClick={() => navigate(-1)}>Назад</button>
       </div>
     </div>
   );

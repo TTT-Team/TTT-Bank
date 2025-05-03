@@ -31,7 +31,7 @@ const DepositScreen = () => {
 
     // Здесь должен быть запрос к API для пополнения
     alert(`Счет пополнен на ${amount}₽`);
-    navigate('/');
+    navigate(-1);
   };
 
   if (!account) return <div>Загрузка...</div>;
@@ -47,7 +47,7 @@ const DepositScreen = () => {
           onChange={(e) => setAmount(e.target.value)}
         />
         <button onClick={handleDeposit}>Пополнить</button>
-        <button className="back-button" onClick={() => navigate('/')}>Назад</button>
+        <button className="back-button" onClick={() => navigate(-1)}>Назад</button>
       </div>
     </div>
   );

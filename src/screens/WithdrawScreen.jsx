@@ -37,7 +37,7 @@ const WithdrawScreen = () => {
 
     // Здесь должен быть запрос к API для вывода
     alert(`Средства выведены: ${amount}₽`);
-    navigate('/');
+    navigate(-1);
   };
 
   if (!account) return <div>Загрузка...</div>;
@@ -54,7 +54,7 @@ const WithdrawScreen = () => {
           onChange={(e) => setAmount(e.target.value)}
         />
         <button onClick={handleWithdraw}>Вывести</button>
-        <button className="back-button" onClick={() => navigate('/')}>Назад</button>
+        <button className="back-button" onClick={() => navigate(-1)}>Назад</button>
       </div>
     </div>
   );
