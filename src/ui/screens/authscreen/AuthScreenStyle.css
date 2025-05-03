@@ -34,6 +34,10 @@ body {
     text-align: center;
 }
 
+.register-container {
+    max-width: 600px;
+}
+
 .title {
     margin-bottom: 30px;
     font-size: 28px;
@@ -79,7 +83,7 @@ body {
     outline: none;
 }
 
-.password-input {
+.password-input, .text-input {
     padding: 12px;
     font-size: 16px;
     border-radius: 10px;
@@ -112,4 +116,56 @@ body {
     font-size: 14px;
     text-align: left;
     width: 100%;
+}
+
+.auth-links {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.auth-link {
+    color: #1c1c1e;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.auth-link:hover {
+    color: #ffe411;
+    text-decoration: underline;
+}
+
+.register-link, .login-link {
+    font-weight: bold;
+}
+
+.checkbox-group {
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    color: #1c1c1e;
+}
+
+.checkbox-label input[type="checkbox"] {
+    margin-top: 3px;
+}
+
+.terms-link {
+    color: #1c1c1e;
+    font-weight: bold;
+    text-decoration: underline;
+    transition: color 0.2s;
+}
+
+.terms-link:hover {
+    color: #ffe411;
 }
