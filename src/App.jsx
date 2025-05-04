@@ -3,6 +3,7 @@ import Layout from "./global/Layout.jsx";
 import LogIn from "./ui/screens/authscreen/LogIn.jsx";
 import RegScreen from "./ui/screens/authscreen/RegScreen.jsx";
 import UserAgreement from "./ui/screens/useragree/UserAgreePage.jsx";
+import MainPage from "./ui/screens/mainpage/MainPage.jsx";
 
 function App() {
     return (
@@ -13,6 +14,7 @@ function App() {
                     <Route path="RegScreen" element={<RegScreen />}/>
                     <Route path="LogIn" element={<LogIn />}/>
                     <Route path="UserAgreement" element={<UserAgreement />}/>
+                    <Route path="MainPage" element={<MainPage />}/>
                 </Route>
             </Routes>
         </BrowserRouter>

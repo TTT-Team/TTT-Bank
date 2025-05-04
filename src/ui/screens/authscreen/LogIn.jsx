@@ -96,6 +96,7 @@ class Form extends React.Component {
                         </button>
                         <div className="auth-links">
                             <Link to="/RegScreen" className="auth-link register-link">Зарегистрироваться</Link>
+                            <Link to="/MainPage" className="auth-link register-link">MainPage(test)</Link>
                         </div>
                     </form>
                 </div>
