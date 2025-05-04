@@ -1,12 +1,57 @@
-# React + Vite
+# TTT Bank - Тестовое задание для хакатона
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Тестовое задание представляет собой веб-приложение для банковских операций, разработанное с использованием современных технологий.
 
-Currently, two official plugins are available:
+## Технологический стек
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Frontend:**
+  - React 19
+  - React Router DOM 7.5 для маршрутизации
+  - Vite 6.3 как сборщик проекта
+  - ESLint 9.22 для проверки кода
 
-## Expanding the ESLint configuration
+## Запуск проекта
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. Убедитесь, что у вас установлен Node.js (рекомендуется версия 18+)
+
+2. Клонируйте репозиторий:
+```bash
+git clone [URL репозитория]
+cd ttt-bank
+```
+
+3. Установите зависимости:
+```bash
+npm install
+```
+
+4. Запустите проект в режиме разработки:
+```bash
+npm run dev
+```
+
+5. Откройте [http://localhost:5173](http://localhost:5173) в вашем браузере
+
+## Структура проекта
+
+```
+ttt-bank/
+├── src/
+│   ├── assets/         # Статические ресурсы
+│   ├── global/         # Глобальные компоненты и утилиты
+│   ├── ui/             # Пользовательский интерфейс
+│   │   └── screens/    # Экраны приложения
+│   ├── App.jsx         # Основной компонент приложения
+│   └── main.jsx        # Точка входа
+├── public/             # Публичные файлы
+├── package.json        # Зависимости и скрипты
+└── vite.config.js      # Конфигурация Vite
+```
+
+## Функциональность
+
+- Авторизация пользователей
+- Регистрация новых пользователей
+- Пользовательское соглашение
+- Главная страница с банковскими операциями
+
